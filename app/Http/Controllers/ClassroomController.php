@@ -122,7 +122,7 @@ class ClassroomController extends BaseController
         $totalPresentCountQuery = "SELECT `attendances`.`student_id`, `students`.`student_id` as `code`, count(`attendances`.`is_present`) as `present` FROM `attendances`
         JOIN `class_sessions` ON `class_sessions`.`id` = `attendances`.`class_session_id`
         JOIN `students` ON `students`.`id` = `attendances`.`student_id`
-        where `attendances`.`is_present`=true and `class_sessions`.`classroom_id` = $classroom->id group by `attendances`.`student_id`";
+        where `attendances`.`is_present`=true and `class_sessions`.`classroom_id` = $classroom->id group by `students`.`student_id`, `attendances`.`student_id`";
 
         $totalPresentCountResults = DB::select( DB::raw($totalPresentCountQuery ) );
 
